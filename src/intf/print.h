@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "utils.h"
 
 enum PRINT_COLOR {
     PRINT_COLOR_BLACK,
@@ -23,6 +24,8 @@ enum PRINT_COLOR {
 };
 
 void print_clear();
+void print_set_color(uint8_t foreground, uint8_t background);
 void print_char(char character);
 void print_str(char *string);
-void print_set_color(uint8_t foreground, uint8_t background);
+void print_num(int number);
+void print_hex(int value);
