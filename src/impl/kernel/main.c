@@ -6,10 +6,4 @@ void kernel_main(){
     print_clear();
     print_set_color(PRINT_COLOR_PURPLE, PRINT_COLOR_BLACK);
     print_str("Welcome to KlarityOS!\n\n");
-
-    print_str("Number: ");
-    print_num(1234567890);
-
-    print_str("\n\nHex value: ");
-    print_hex(0xb8000);
 }
