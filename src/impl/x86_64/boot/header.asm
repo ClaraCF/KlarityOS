@@ -12,6 +12,11 @@ header_start:
     ;; Checksum
     dd 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))
 
+
+    ;; Frame Buffer tag
+
+
+
     ;; End tag
     dw 0
     dw 0
