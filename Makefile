@@ -3,8 +3,10 @@
 
 
 # Set some variables
-CC := x86_64-elf-gcc
-LD := x86_64-elf-ld
+#CC := x86_64-elf-gcc
+#LD := x86_64-elf-ld
+CC := clang
+LD := ld.lld-11
 
 
 # Gather all source files and objects
