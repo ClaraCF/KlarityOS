@@ -1,7 +1,6 @@
 # Ignore build directories
 build/
 
-
 # IDE configuration files
 .idea/
 .vscode/
