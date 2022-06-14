@@ -8,6 +8,11 @@
 CC := clang
 LD := ld.lld-11
 
+# Compilation flags and include directories
+CFLAGS := -W -Wall -ffreestanding -O2
+LDFLAGS := -s
+INCLUDE := src/intf
+
 
 # Gather all source files and objects
 kernel_source_files := $(shell find src/impl/kernel -name *.c)
@@ -26,12 +31,12 @@ x86_64_object_files := $(x86_64_c_object_files) $(x86_64_asm_object_files)
 # Build the kernel objects
 $(kernel_object_files): build/kernel/%.o : src/impl/kernel/%.c
 	mkdir -p $(dir $@)
-	$(CC) -c -I src/intf -ffreestanding $(patsubst build/kernel/%.o,src/impl/kernel/%.c,$@) -o $@
+	$(CC) -c -I $(INCLUDE) $(CFLAGS) $(patsubst build/kernel/%.o,src/impl/kernel/%.c,$@) -o $@
 
 # Build the C objects
 $(x86_64_c_object_files): build/x86_64/%.o : src/impl/x86_64/%.c
 	mkdir -p $(dir $@)
-	$(CC) -c -I src/intf -ffreestanding $(patsubst build/x86_64/%.o,src/impl/x86_64/%.c,$@) -o $@
+	$(CC) -c -I $(INCLUDE) $(CFLAGS) $(patsubst build/x86_64/%.o,src/impl/x86_64/%.c,$@) -o $@
 
 # Build the ASM objects
 $(x86_64_asm_object_files): build/x86_64/%.o : src/impl/x86_64/%.asm
@@ -43,7 +48,7 @@ $(x86_64_asm_object_files): build/x86_64/%.o : src/impl/x86_64/%.asm
 .PHONY: build-x86_64
 build-x86_64: $(kernel_object_files) $(x86_64_object_files)
 	mkdir -p dist/x86_64
-	$(LD) -n -o dist/x86_64/kernel.bin -T targets/x86_64/linker.ld $(kernel_object_files) $(x86_64_object_files)
+	$(LD) $(LDFLAGS) -n -o dist/x86_64/kernel.bin -T targets/x86_64/linker.ld $(kernel_object_files) $(x86_64_object_files)
 	cp dist/x86_64/kernel.bin targets/x86_64/iso/boot/kernel.bin
 	grub-mkrescue /usr/lib/grub/i386-pc -o dist/x86_64/kernel.iso targets/x86_64/iso
 
