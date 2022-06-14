@@ -1,5 +1,10 @@
-.idea
-build
-cmake-build-debug
-dist
+# Built binaries
 kernel.bin
+
+# Build directories
+dist
+build
+
+# IDE configuration files
+.idea
+.vscode
