@@ -32,6 +32,10 @@ void print_clear()
     }
 }
 
+void print_set_color(uint8_t foreground, uint8_t background) {
+    color = foreground + (background << 4);
+}
+
 void print_newline() {
     col = 0;
 
@@ -82,6 +86,14 @@ void print_str(char *str) {
     }
 }
 
-void print_set_color(uint8_t foreground, uint8_t background) {
-    color = foreground + (background << 4);
+void print_num(int number)
+{
+    char buff[100];
+    print_str(itoa(number, buff, 10));
+}
+
+void print_hex(int value)
+{
+    char buff[100];
+    print_str(itox(value, buff));
 }
