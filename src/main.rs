@@ -3,13 +3,16 @@
 
 use core::panic::PanicInfo;
 
-mod io;
-use io::*;
+mod console;
+use console::{Colors};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    // Initialize the console
+    let mut console = console::Console::new();
+
     // Welcome to KlarityOS
-    println(b"Welcome to KlarityOS!", Colors::Purple).expect("Print welcome message");
+    console.println("Este es un texto increiblemente largo que deberia exceder el limite de caracteres de una sola linea y por lo tanto deberia automaticamente ocupar varias", Some(Colors::Purple));
 
     loop{}
 }
